@@ -5,12 +5,13 @@ phases:
       dotnet: latest
   pre_build:
     commands:
+      - echo login to code artifact
+      - aws codeartifact login --tool dotnet --repository helpmycase-backend --domain helpmycase-backend --domain-owner 460234074473
       - echo Build dotnet application
       - dotnet nuget add source "https://helpmycase-backend-460234074473.d.codeartifact.eu-west-1.amazonaws.com/nuget/helpmycase-backend/v3/index.json" -n "helpmycase-backend/helpmycase-backend"
       - dotnet publish -c Release
       - echo Get ecr login credentials...
       - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 460234074473.dkr.ecr.eu-west-1.amazonaws.com
-      - aws codeartifact login --tool dotnet --repository helpmycase-backend --domain helpmycase-backend --domain-owner 460234074473
   build:
     commands:
       - echo build docker image --source helpmycase-backend/helpmycase-backend
