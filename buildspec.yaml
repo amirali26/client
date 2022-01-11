@@ -13,9 +13,7 @@ phases:
       - dotnet nuget add source "https://helpmycase-backend-460234074473.d.codeartifact.eu-west-1.amazonaws.com/nuget/helpmycase-backend/v3/index.json" -n "helpmycase-backend/helpmycase-backend"
   build:
     commands:
-      - dotnet add package Api.Database.Models --source helpmycase-backend/helpmycase-backend
-      - dotnet add package Api.Database.MySql --source helpmycase-backend/helpmycase-backend
-      - echo build docker image
+      - echo build docker image --source helpmycase-backend/helpmycase-backend
       - docker build -t handlemycaseclientregistry-clientbackendf728ad9b-irvzrprmeerk .
       - docker tag handlemycaseclientregistry-clientbackendf728ad9b-irvzrprmeerk:latest 460234074473.dkr.ecr.eu-west-1.amazonaws.com/handlemycaseclientregistry-clientbackendf728ad9b-irvzrprmeerk:latest
   post_build:
