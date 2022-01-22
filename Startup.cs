@@ -51,7 +51,7 @@ namespace client
                                     "http://localhost:3000",
                                     "https://solicitor.helpmycase.co.uk",
                                     "https://forms.helpmycase.co.uk",
-                                    "http://client.helpmycase.co.uk")
+                                    "https://client.helpmycase.co.uk")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                         }
