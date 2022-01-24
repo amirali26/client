@@ -20,4 +20,6 @@ phases:
     commands:
       - echo Push docker to ecr registry
       - docker push 460234074473.dkr.ecr.eu-west-1.amazonaws.com/handlemycaseclientregistry-clientbackendf728ad9b-irvzrprmeerk:latest
+      - echo Restart tasks
+      - aws ecs update-service --cluster HandleMyCaseEcsSetup-ClientbackendserviceService6B2A37CF-aM3jbfCiMV3R --service  --force-new-deployment
       
