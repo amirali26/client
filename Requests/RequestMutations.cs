@@ -49,7 +49,11 @@ namespace client.Requests
                Description = requestInput.Description,
                Topic = areaOfPractice,
                CreatedDate = DateTime.Now,
-               Client = client
+               Region = requestInput.Region,
+               PostCode = requestInput.PostCode,
+               AreaInRegion = requestInput.AreaInRegion,
+               Client = client,
+               
            };
 
            await context.Requests.AddAsync(request);

@@ -7,5 +7,8 @@ namespace client.Requests
         public string Email { get; set; }
         public string Description { get; set; }
         public string Topic { get; set; }
+        public string AreaInRegion { get; set; }
+        public string PostCode { get; set; }
+        public string Region { get; set; }
     }
 }
