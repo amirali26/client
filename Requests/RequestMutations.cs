@@ -43,6 +43,8 @@ namespace client.Requests
            };
            
            var areaOfPractice = await context.AreasOfPractice.Where(aop => aop.ExternalId == requestInput.Topic).FirstAsync();
+           var lastRequestNumber = await context.Requests.OrderByDescending(r => r.RequestNumber).Select(r => r.RequestNumber).FirstOrDefaultAsync();
+           
            var request = new Request()
            {
                ExternalId = Guid.NewGuid().ToString(),
@@ -53,7 +55,7 @@ namespace client.Requests
                PostCode = requestInput.PostCode,
                AreaInRegion = requestInput.AreaInRegion,
                Client = client,
-               
+               RequestNumber = lastRequestNumber + 1,
            };
 
            await context.Requests.AddAsync(request);

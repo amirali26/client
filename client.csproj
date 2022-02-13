@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Api.Database.Models" Version="1.0.1-31" />
-    <PackageReference Include="Api.Database.MySql" Version="1.0.2-11" />
+    <PackageReference Include="Api.Database.Models" Version="1.0.1-33" />
     <PackageReference Include="AWSSDK.CognitoIdentityProvider" Version="3.7.1.79" />
     <PackageReference Include="AWSSDK.Core" Version="3.7.5.8" />
     <PackageReference Include="HotChocolate.AspNetCore" Version="12.0.1" />
@@ -17,6 +16,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Api.Database.Models\Api.Database.Models.csproj" />
+    <ProjectReference Include="..\Api.Database.MySql\Api.Database.MySql.csproj" />
   </ItemGroup>
 
 </Project>
