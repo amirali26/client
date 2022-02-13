@@ -17,10 +17,4 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Api.Database.Models\Api.Database.Models.csproj" />
-    <ProjectReference Include="..\Api.Database.MySql\Api.Database.MySql.csproj" />
-  </ItemGroup>
-
 </Project>
