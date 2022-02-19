@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using Api.Database.MySql;
 using client.AreasOfPractices;
+using client.Enquiry;
 using client.Requests;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -67,6 +68,8 @@ namespace client
                 .AddAuthorization()
                 .AddQueryType(d => d.Name("Query"))
                 .AddType<RequestQueries>()
+                .AddType<EnquiryQueries>()
+                .AddTypeExtension<EnquiryTypeExtension>()
                 .AddType<AreasOfPracticeQueries>()
                 .AddMutationType(d => d.Name("Mutation"))
                 .AddType<RequestMutations>();
