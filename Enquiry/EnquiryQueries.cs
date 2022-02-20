@@ -1,6 +1,7 @@
 using System.Linq;
 using Api.Database.MySql;
 using client.Account;
+using client.User;
 using HotChocolate;
 using HotChocolate.Data;
 using HotChocolate.Types;
@@ -25,14 +26,33 @@ namespace client.Enquiry
     {
         [BindMember(nameof(Api.Database.Models.Enquiry.Account))]
         [UseProjection]
-        public AccountDto GetAccount([GlobalState("ClientContext")] ClientContext clientContext,
+        public AccountDto GetAccount(
             [Service] DashboardContext context, [Parent] Api.Database.Models.Enquiry enquiry)
         {
-            return context.Enquiries.Include(e => e.Account).Where(e => e.ExternalId == enquiry.ExternalId).Select(e => new AccountDto()
-            {
-                Name = e.Account.Name,
-                ExternalId = e.Account.ExternalId,
-            }).First();
+            return context.Enquiries.Include(e => e.Account).Where(e => e.ExternalId == enquiry.ExternalId).Select(e =>
+                new AccountDto()
+                {
+                    Name = e.Account.Name,
+                    Email = e.Account.Email,
+                    Website = e.Account.Website,
+                    PhoneNumber = e.Account.PhoneNumber,
+                    RegisteredDate = e.Account.RegisteredDate,
+                    AreasOfPractice = e.Account.AreasOfPractice.Select(aop => aop.Name).AsEnumerable(),
+                }).First();
+        }
+
+        [BindMember(nameof(Api.Database.Models.Enquiry.User))]
+        [UseProjection]
+        public UserDto GetUser(
+            [Service] DashboardContext context, [Parent] Api.Database.Models.Enquiry enquiry)
+        {
+            return context.Enquiries.Include(e => e.User).Where(e => e.ExternalId == enquiry.ExternalId).Select(e =>
+                new UserDto()
+                {
+                    Email = e.User.Email,
+                    Name = e.User.Name,
+                    PhoneNumber = e.User.PhoneNumber,
+                }).First();
         }
     }
 }

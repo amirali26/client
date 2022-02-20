@@ -1,12 +1,16 @@
 using System;
+using System.Collections.Generic;
+using Api.Database.Models;
 
 namespace client.Account
 {
     public class AccountDto
     {
-        public string ExternalId { get; set; }
         public string Name { get; set; }
-        string CreatedBy { get; set; }
-        DateTime CreatedAt { get; set; }
+        public string Website { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public DateTime RegisteredDate { get; set; }
+        public IEnumerable<string> AreasOfPractice { get; set; }
     }
 }
