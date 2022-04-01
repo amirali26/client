@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Api.Database.Models;
 using Api.Database.MySql;
+using FluentValidation;
 using HotChocolate;
 using HotChocolate.Types;
 using Microsoft.EntityFrameworkCore;
@@ -17,9 +18,17 @@ namespace client.Requests
     public class RequestMutations
     {
         public async Task<IQueryable<Request>> AddRequest(
-            [Service] DashboardContext context, [Service] AWSCognito cognitoHelper, RequestInput requestInput
+            [Service] DashboardContext context, [Service] AWSCognito cognitoHelper, RequestInput requestInput,
+            [Service] IValidator<RequestInput> validator
         )
         {
+            var validationResponse = await validator.ValidateAsync(requestInput);
+
+            if (!validationResponse.IsValid)
+            {
+                throw new ValidationException(validationResponse.Errors);
+            }
+            
             // Check if the user exists
             var response = await cognitoHelper.IsExistingUser(requestInput.Email);
             Client client;
@@ -44,8 +53,6 @@ namespace client.Requests
             {
                 client = await context.Clients.Where(c => c.ExternalId == response.Username).FirstAsync();
             }
-
-            ;
 
             var areaOfPractice = await context.AreasOfPractice.Where(aop => aop.ExternalId == requestInput.Topic)
                 .FirstAsync();
@@ -78,7 +85,8 @@ namespace client.Requests
                 Name = client.Name,
             };
 
-            await AWSHelper.SendEmail(JsonConvert.SerializeObject(messageBody), "RequestSubmission", request.ExternalId);
+            await AWSHelper.SendEmail(JsonConvert.SerializeObject(messageBody), "RequestSubmission",
+                request.ExternalId);
             return context.Requests.Where(r => r.ExternalId == request.ExternalId);
         }
     }
