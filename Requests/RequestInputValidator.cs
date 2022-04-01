@@ -7,8 +7,8 @@ namespace client.Requests
     {
         public RequestInputValidator()
         {
-            RuleFor(r => r.Description).NotNull().NotEmpty().MinimumLength(20).MaximumLength(200);
-            RuleFor(r => r.Email).Matches(ValidationHelper.EmailRegex);
+            RuleFor(r => r.Description).NotNull().NotEmpty().MinimumLength(20).MaximumLength(800);
+            RuleFor(r => r.Email).EmailAddress();
             RuleFor(r => r.PhoneNumber).Matches(ValidationHelper.PhoneRegex);
             RuleFor(r => r.Name).NotNull().NotEmpty().MinimumLength(5).MaximumLength(50);
             RuleFor(r => r.Region).NotNull().NotEmpty();
