@@ -6,7 +6,7 @@ namespace client.Utilities
     {
         public IError OnError(IError error)
         {
-            return error.WithMessage(error.Exception.Message);
+            return error.Exception != null ? error.WithMessage(error.Exception.Message) : error;
         }
     }
 }

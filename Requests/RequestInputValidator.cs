@@ -14,7 +14,6 @@ namespace client.Requests
             RuleFor(r => r.Region).NotNull().NotEmpty();
             RuleFor(r => r.PostCode).NotNull().NotEmpty();
             RuleFor(r => r.AreaInRegion).NotNull().NotEmpty();
-            RuleFor(r => r.Topic).IsInEnum();
         }
     }
 }
