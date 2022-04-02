@@ -4,6 +4,7 @@ using Api.Database.MySql;
 using client.AreasOfPractices;
 using client.Enquiry;
 using client.Requests;
+using client.Utilities;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -44,6 +45,7 @@ namespace client
                 });
             services.AddAuthorization();
             services.AddScoped<IValidator<RequestInput>, RequestInputValidator>();
+            services.AddErrorFilter<GraphQLErrorFilter>();
             services
                 .AddCors(options =>
                     options.AddDefaultPolicy(
