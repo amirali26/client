@@ -6,20 +6,20 @@ phases:
   pre_build:
     commands:
       - echo login to code artifact
-      - aws codeartifact login --tool dotnet --repository helpmycase-backend --domain helpmycase-backend --domain-owner 460234074473
+      - aws codeartifact login --tool dotnet --repository helpmycase --domain helpmycase --domain-owner 619680812856
       - echo Build dotnet application
       - dotnet publish -c Release
       - echo Get ecr login credentials...
-      - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 460234074473.dkr.ecr.eu-west-1.amazonaws.com
+      - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 619680812856.dkr.ecr.eu-west-1.amazonaws.com
   build:
     commands:
       - echo build docker image --source helpmycase-backend/helpmycase-backend
-      - docker build -t handlemycaseclientregistry-clientbackendf728ad9b-irvzrprmeerk .
-      - docker tag handlemycaseclientregistry-clientbackendf728ad9b-irvzrprmeerk:latest 460234074473.dkr.ecr.eu-west-1.amazonaws.com/handlemycaseclientregistry-clientbackendf728ad9b-irvzrprmeerk:latest
+      - docker build -t handlemycaseclientregistry-clientbackendf728ad9b-4ftk3u4z2ds4 .
+      - docker tag handlemycaseclientregistry-clientbackendf728ad9b-4ftk3u4z2ds4:latest 619680812856.dkr.ecr.eu-west-1.amazonaws.com/handlemycaseclientregistry-clientbackendf728ad9b-4ftk3u4z2ds4:latest
   post_build:
     commands:
       - echo Push docker to ecr registry
-      - docker push 460234074473.dkr.ecr.eu-west-1.amazonaws.com/handlemycaseclientregistry-clientbackendf728ad9b-irvzrprmeerk:latest
+      - docker push 619680812856.dkr.ecr.eu-west-1.amazonaws.com/handlemycaseclientregistry-clientbackendf728ad9b-4ftk3u4z2ds4:latest
       - echo Restart tasks
-      - aws ecs update-service --cluster HandleMyCaseEcsSetup-DashboardBackendCluster36D6E813-NSmRLyKRJp1P  --service HandleMyCaseEcsSetup-ClientbackendserviceService6B2A37CF-aM3jbfCiMV3R --force-new-deployment
+      - aws ecs update-service --cluster HandleMyCaseEcsSetup-DashboardBackendCluster36D6E813-ldnZw9IlJSsl  --service HandleMyCaseEcsSetup-ClientbackendserviceService6B2A37CF-aM3jbfCiMV3R --force-new-deployment
       
