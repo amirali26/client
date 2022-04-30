@@ -37,6 +37,7 @@ namespace client.Enquiry
                     Website = e.Account.Website,
                     PhoneNumber = e.Account.PhoneNumber,
                     RegisteredDate = e.Account.RegisteredDate,
+                    ImageUrl = e.Account.ImageUrl,
                     AreasOfPractice = e.Account.AreasOfPractice.Select(aop => aop.Name).AsEnumerable(),
                 }).First();
         }
@@ -52,6 +53,7 @@ namespace client.Enquiry
                     Email = e.User.Email,
                     Name = e.User.Name,
                     PhoneNumber = e.User.PhoneNumber,
+                    ImageUrl = e.User.ImageUrl,
                 }).First();
         }
     }

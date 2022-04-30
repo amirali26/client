@@ -14,6 +14,7 @@ namespace client.Account
         public string Region { get; set; }
         public string AreaInRegion { get; set; }
         public DateTime RegisteredDate { get; set; }
+        public string ImageUrl { get; set; }
         public IEnumerable<string> AreasOfPractice { get; set; }
     }
 }
