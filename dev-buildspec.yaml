@@ -1,0 +1,25 @@
+version: 0.2
+phases:
+  install:
+    runtime-version:
+      dotnet: latest
+  pre_build:
+    commands:
+      - echo login to code artifact
+      - aws codeartifact login --tool dotnet --repository helpmycase --domain helpmycase --domain-owner 619680812856
+      - echo Build dotnet application
+      - dotnet publish -c Release
+      - echo Get ecr login credentials...
+      - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 619680812856.dkr.ecr.eu-west-1.amazonaws.com
+  build:
+    commands:
+      - echo build docker image --source helpmycase-backend/helpmycase-backend
+      - docker build -t dev-handlemycaseclientregistry-clientbackendf728ad9b-ibybr4nurtmb .
+      - docker tag dev-handlemycaseclientregistry-clientbackendf728ad9b-ibybr4nurtmb:latest 619680812856.dkr.ecr.eu-west-1.amazonaws.com/dev-handlemycaseclientregistry-clientbackendf728ad9b-ibybr4nurtmb:latest
+  post_build:
+    commands:
+      - echo Push docker to ecr registry
+      - docker push 619680812856.dkr.ecr.eu-west-1.amazonaws.com/dev-handlemycaseclientregistry-clientbackendf728ad9b-ibybr4nurtmb:latest
+      - echo Restart tasks
+      - aws ecs update-service --cluster dev-HandleMyCaseEcsSetup-DashboardBackendCluster36D6E813-l2XR35mYOeuJ  --service dev-HandleMyCaseEcsSetup-ClientbackendserviceService6B2A37CF-v9iAPR8tvv2E --force-new-deployment
+      
