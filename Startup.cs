@@ -85,7 +85,7 @@ namespace client
         {
             app.UseCors();
 
-            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
+            app.UseDeveloperExceptionPage();
 
             app.UseRouting();
             app.UseAuthentication();
