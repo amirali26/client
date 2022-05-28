@@ -67,6 +67,7 @@ namespace client
                         .LogTo(Console.WriteLine, LogLevel.Information)
                 )
                 .AddGraphQLServer()
+                .ModifyRequestOptions(opt => opt.IncludeExceptionDetails = true)
                 .AddProjections()
                 .AddHttpRequestInterceptor<HttpRequestInterceptor>()
                 .AddAuthorization()
