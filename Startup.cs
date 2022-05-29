@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using Serilog;
 
 namespace client
 {
@@ -79,13 +80,13 @@ namespace client
                 .AddMutationType(d => d.Name("Mutation"))
                 .AddType<RequestMutations>();
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors();
-
-            app.UseDeveloperExceptionPage();
+            app.UseSerilogRequestLogging();
+            
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             app.UseRouting();
             app.UseAuthentication();
