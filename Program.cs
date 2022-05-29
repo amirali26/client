@@ -15,7 +15,7 @@ namespace client
         {
             var client = new AmazonCloudWatchLogsClient();
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .MinimumLevel.Warning()
                 .Enrich.FromLogContext()
                 .WriteTo.AmazonCloudWatch(
                     logGroup: "dev-HandleMyCaseEcsSetup-ClientLogGroup94520E53-1aKmWNVBWqxU",
