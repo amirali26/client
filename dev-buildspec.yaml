@@ -14,7 +14,7 @@ phases:
   build:
     commands:
       - echo build docker image --source helpmycase-backend/helpmycase-backend
-      - docker build -t dev-handlemycaseclientregistry-clientbackendf728ad9b-ibybr4nurtmb .
+      - docker build -f Dockerfile.debug -t dev-handlemycaseclientregistry-clientbackendf728ad9b-ibybr4nurtmb .
       - docker tag dev-handlemycaseclientregistry-clientbackendf728ad9b-ibybr4nurtmb:latest 619680812856.dkr.ecr.eu-west-1.amazonaws.com/dev-handlemycaseclientregistry-clientbackendf728ad9b-ibybr4nurtmb:latest
   post_build:
     commands:
