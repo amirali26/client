@@ -8,7 +8,7 @@ phases:
       - echo login to code artifact
       - aws codeartifact login --tool dotnet --repository helpmycase --domain helpmycase --domain-owner 619680812856
       - echo Build dotnet application
-      - ASPNETCORE_ENVIRONMENT=development dotnet publish -c Debug -p:EnvironmentName=Staging
+      - ASPNETCORE_ENVIRONMENT=Development dotnet publish -c Debug -p:EnvironmentName=Development
       - echo Get ecr login credentials...
       - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 619680812856.dkr.ecr.eu-west-1.amazonaws.com
   build:
