@@ -1,6 +1,7 @@
   # syntax=docker/dockerfile:1
-  FROM mcr.microsoft.com/dotnet/aspnet:5.0
-  COPY bin/Debug/net5.0/publish/ .
+  FROM mcr.microsoft.com/dotnet/aspnet:5.0.17-buster-slim-arm64v8
+  COPY bin/Debug/net5.0/publish/ ./app
   ENV ASPNETCORE_URLS http://+:8080
+  WORKDIR "/app"
   EXPOSE 8080
-  ENTRYPOINT ["dotnet", "client.dll"]
+  ENTRYPOINT ["dotnet", "./client.dll"]

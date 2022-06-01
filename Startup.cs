@@ -1,5 +1,4 @@
 using System;
-using System.Net;
 using Api.Database.MySql;
 using client.AreasOfPractices;
 using client.Enquiry;
@@ -15,7 +14,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using Serilog;
 
 namespace client
