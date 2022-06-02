@@ -24,7 +24,7 @@
       "launchUrl": "graphql",
       "applicationUrl": "https://localhost:8082;http://localhost:8083",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Local"
       }
     }
   }

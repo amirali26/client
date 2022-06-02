@@ -9,6 +9,7 @@ using HotChocolate;
 using HotChocolate.Types;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 // Whats the different between async task & task
@@ -17,6 +18,11 @@ namespace client.Requests
     [ExtendObjectType(Name = "Mutation")]
     public class RequestMutations
     {
+        private readonly IConfiguration _configuration;
+        public RequestMutations(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public async Task<IQueryable<Request>> AddRequest(
             [Service] DashboardContext context, [Service] AWSCognito cognitoHelper, RequestInput requestInput,
             [Service] IValidator<RequestInput> validator
@@ -86,7 +92,7 @@ namespace client.Requests
             };
 
             await AWSHelper.SendEmail(JsonConvert.SerializeObject(messageBody), "RequestSubmission",
-                request.ExternalId);
+                request.ExternalId, _configuration["AWS:SQS:URL"]);
             return context.Requests.Where(r => r.ExternalId == request.ExternalId);
         }
     }
