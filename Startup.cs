@@ -53,8 +53,11 @@ namespace client
                             builder.WithOrigins("http://localhost:3001",
                                     "http://localhost:3002",
                                     "http://localhost:3000",
+                                    "https://dev-solicitor.helpmycase.co.uk",
                                     "https://solicitor.helpmycase.co.uk",
+                                    "https://dev-solicitor.helpmycase.co.uk",
                                     "https://forms.helpmycase.co.uk",
+                                    "https://dev-forms.helpmycase.co.uk",
                                     "https://client.helpmycase.co.uk")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
