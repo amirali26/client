@@ -1,10 +1,8 @@
 using System;
 using Amazon.CloudWatchLogs;
-using client;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using Serilog.Events;
 using Serilog.Sinks.AwsCloudWatch;
 
 namespace client

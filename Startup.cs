@@ -37,7 +37,6 @@ namespace client
                 {
                     var region = Configuration["CognitoConfiguration:Region"];
                     var userPoolId = Configuration["CognitoConfiguration:UserPoolId"];
-                    var appClientId = Configuration["CognitoConfiguration:AppClientId"];
                     options.TokenValidationParameters = new TokenValidationParameters {ValidateAudience = false};
                     options.Authority = $"https://cognito-idp.{region}.amazonaws.com/{userPoolId}";
                     options.RequireHttpsMetadata = false;
@@ -58,7 +57,8 @@ namespace client
                                     "https://dev-solicitor.helpmycase.co.uk",
                                     "https://forms.helpmycase.co.uk",
                                     "https://dev-forms.helpmycase.co.uk",
-                                    "https://client.helpmycase.co.uk")
+                                    "https://client.helpmycase.co.uk",
+                                    "https://dev-client.helpmycase.co.uk")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                         }
