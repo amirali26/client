@@ -80,6 +80,7 @@ namespace client.Requests
                 AreaInRegion = requestInput.AreaInRegion,
                 Client = client,
                 RequestNumber = lastRequestNumber + 1,
+                ShowPhoneNumber = requestInput.ShowPhoneNumber,
             };
 
             await context.Requests.AddAsync(request);
@@ -89,6 +90,7 @@ namespace client.Requests
             {
                 RequestEmail = client.Email,
                 Name = client.Name,
+                Url = _configuration["Url"],
             };
 
             await AWSHelper.SendEmail(JsonConvert.SerializeObject(messageBody), "RequestSubmission",
