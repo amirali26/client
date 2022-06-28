@@ -97,5 +97,24 @@ namespace client.Requests
                 request.ExternalId, _configuration["AWS:SQS:URL"]);
             return context.Requests.Where(r => r.ExternalId == request.ExternalId);
         }
+
+        public async Task<Api.Database.Models.Enquiry> RequestCallback([Service] DashboardContext context, string enquiryId)
+        {
+            var enquiry = await context.Enquiries.Include(e => e.User)
+                .Where(e => e.ExternalId == enquiryId).FirstAsync();
+            
+            
+            dynamic messageBody = new
+            {
+                RequestEmail = enquiry.User.Email,
+                SolicitorResponseNumber = enquiry.EnquiryNumber,
+                Url = _configuration["Url"],
+            };
+
+            await AWSHelper.SendEmail(JsonConvert.SerializeObject(messageBody), "RequestCallback",
+                enquiryId, _configuration["AWS:SQS:URL"]);
+
+            return enquiry;
+        }
     }
 }
